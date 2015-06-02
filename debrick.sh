@@ -3,6 +3,8 @@
 # The purpose of the script is to reinstall the operating system (debrick) on 
 # a harddrive that has been extracted from the housing of a WD MyBook Live.
 #
+# Taken from http://mybookworld.wikidot.com/mybook-live-debricking-guide-osx-and-windows
+#       http://john-hunt.com/2013/04/25/recovering-data-from-a-wd-mybook-live-2tb-3tbor-similar/
 
 #help screen
 if  [ $# = 1 -a "$1" = "--help" ]; then
@@ -86,8 +88,8 @@ if [ $disk = "notset" ]; then
         if [ -e /dev/sd${x} ];                                then
         diskTest=$(parted --script /dev/sd${x} print)
         if [ ! -e /dev/sd${x}0 -a ! -e /dev/sd${x}5 ];            then
-        if [[ $diskTest = *WD??EARS* ]];                        then
-        if [[ $diskTest = *??00GB* ]];                            then
+        if [[ $diskTest = *WD??EARS* || $diskTest = *WD??EZRS* ]]; then
+        if [[ $diskTest = *??00GB* || $diskTest = *??01GB* ]]; then
         if [[ $diskTest = *3*B*B*5??MB*primary* ]];                then
         if [[ $diskTest = *1*B*B*2???MB*ext3*primary*raid* ]];    then
         if [[ $diskTest = *2*B*B*2???MB*ext3*primary*raid* ]];    then
@@ -370,3 +372,4 @@ rm ./swap
 echo
 echo "all done! device should be debricked!"
 echo
+
